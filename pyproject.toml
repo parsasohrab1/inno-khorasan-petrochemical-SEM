@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sems"
+version = "0.1.0"
+description = "سامانه مدیریت انرژی هوشمند پتروشیمی خراسان مبتنی بر یادگیری تقویتی"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["src"]
