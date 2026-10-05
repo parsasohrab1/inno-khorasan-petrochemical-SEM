@@ -1,17 +1,17 @@
 """
-پارامترهای پیکربندی سامانه: محدودیت‌های عملیاتی، اختلالات، قیمت‌ها و فضای اقدام.
-مقادیر برگرفته از سند الزامات نرم‌افزاری (SRS) بخش‌های ۱، ۲-۳ و ۲-۴.
+System configuration parameters: operating constraints, disturbances, prices and action space.
+Values are taken from sections 1, 2-3 and 2-4 of the Software Requirements Specification (SRS).
 """
 
 from __future__ import annotations
 
-# طول هر گام تصمیم کنترلی. نمونه‌برداری SCADA واقعی هر ۱ ثانیه است اما آموزش
-# عامل RL روی آن بازه غیرعملی است؛ بنابراین هر گام محیط معادل یک بازه تصمیم
-# ۱۵ دقیقه‌ای در نظر گرفته می‌شود (فرکانس تصمیم کنترلی، نه فرکانس پایش).
+# Length of each control decision step. Real SCADA sampling is every 1 second, but training
+# the RL agent on that interval is impractical; therefore each environment step is
+# considered equivalent to a 15-minute decision interval (control decision frequency, not monitoring frequency).
 DECISION_STEP_MINUTES = 15
-STEPS_PER_EPISODE = 96  # یک روز کامل عملیاتی (۹۶ × ۱۵ دقیقه = ۲۴ ساعت)
+STEPS_PER_EPISODE = 96  # one full operating day (96 × 15 minutes = 24 hours)
 
-# محدودیت‌های عملیاتی متغیرهای حالت/اختلال (بخش ۱ و ۲-۳ SRS)
+# Operating constraints of state/disturbance variables (sections 1 and 2-3 of the SRS)
 OPERATING_LIMITS = {
     "T_primary_reformer": (750.0, 850.0),      # °C
     "T_secondary_reformer": (950.0, 1050.0),   # °C
@@ -29,17 +29,17 @@ OPERATING_LIMITS = {
     "melamine_production": (1.5, 3.0),         # ton/h
 }
 
-# متغیرهای غیرقابل کنترل (اختلالات فرآیندی)
+# Uncontrollable variables (process disturbances)
 DISTURBANCE_RANGES = {
     "feed_composition_CH4": (0.85, 0.95),
     "feed_composition_C2H6": (0.02, 0.08),
     "feed_composition_C3H8": (0.01, 0.04),
     "feed_composition_N2": (0.01, 0.03),
     "feed_composition_CO2": (0.005, 0.02),
-    "coking_factor": (0.0, 0.3),  # ضریب کاهش راندمان بر اثر کک‌زدگی کویل‌های ریفرمر
+    "coking_factor": (0.0, 0.3),  # efficiency reduction factor due to reformer coil coking
 }
 
-# بازه قیمت‌ها (ریال) - بخش ۲-۳-۲ SRS
+# Price range (rials) - section 2-3-2 of the SRS
 PRICE_RANGES = {
     "gas_price": (5_000.0, 8_000.0),          # IRR/Nm3
     "electricity_price": (800.0, 1_500.0),    # IRR/kWh
@@ -49,28 +49,28 @@ PRICE_RANGES = {
     "carbon_credit_price": (500.0, 1_500.0),  # IRR/ton CO2
 }
 
-# فضای اقدام کنترلی (بخش ۲-۴-۱ SRS) - ۱۱ اقدام پیوسته.
-# نام‌های *_APPROX یعنی اثر این اقدام بر مدل فیزیکی به‌صورت ساده‌شده مدل شده
-# است (مدل تفصیلی این تجهیزات در دامنه این ریپو نیست)؛ نگاه کنید به
-# simulator.py برای جزئیات.
+# Control action space (section 2-4-1 of the SRS) - 11 continuous actions.
+# Names with *_APPROX mean the effect of this action on the physical model is modeled
+# in a simplified way (a detailed model of this equipment is outside the scope of this repo); see
+# simulator.py for details.
 ACTION_SPACE = {
     "S_C_ratio": (2.5, 4.0),                  # mol/mol
     "T_primary_reformer": (750.0, 850.0),     # °C  (COT)
     "T_secondary_reformer": (950.0, 1050.0),  # °C
     "P_ammonia_reactor": (120.0, 250.0),      # bar
-    "secondary_air_pct": (50.0, 100.0),       # % ظرفیت دبی هوا به ریفرمر ثانویه
+    "secondary_air_pct": (50.0, 100.0),       # % of air flow capacity to the secondary reformer
     "cooling_water_temp_target": (25.0, 40.0),# °C
-    "cooling_water_flow_pct": (50.0, 100.0),  # % ظرفیت گردش آب خنک‌کننده
-    "compressor_speed_pct": (60.0, 100.0),    # % توان کمپرسورهای اصلی
-    "heat_recovery_ratio_pct": (50.0, 90.0),  # % APPROX - نسبت بازیابی حرارت
-    "aux_fuel_pct": (0.0, 100.0),             # % APPROX - دبی سوخت کمکی
-    "control_valve_pct": (0.0, 100.0),        # % APPROX - گشودگی شیرهای کنترلی کلیدی
+    "cooling_water_flow_pct": (50.0, 100.0),  # % of cooling water circulation capacity
+    "compressor_speed_pct": (60.0, 100.0),    # % of main compressors power
+    "heat_recovery_ratio_pct": (50.0, 90.0),  # % APPROX - heat recovery ratio
+    "aux_fuel_pct": (0.0, 100.0),             # % APPROX - auxiliary fuel flow
+    "control_valve_pct": (0.0, 100.0),        # % APPROX - opening of key control valves
 }
 ACTION_KEYS = list(ACTION_SPACE.keys())
 
-# شاخص مصرف ویژه انرژی هدف (SEC) - بخش ۱-۲ SRS، مبنای تشخیص ناکارآمدی
+# Target specific energy consumption (SEC) indicator - section 1-2 of the SRS, basis for inefficiency detection
 SEC_TARGET_AMMONIA_GJ_PER_TON = 62.61
 SEC_TARGET_UREA_GJ_PER_TON = 4.52
-SEC_ALERT_DEVIATION_PCT = 5.0  # انحراف بیش از این درصد از هدف → هشدار پیشگیرانه
+SEC_ALERT_DEVIATION_PCT = 5.0  # deviation above this percentage from the target → preventive alert
 
 RANDOM_SEED = 42

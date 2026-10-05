@@ -1,19 +1,19 @@
 """
-هسته شبیه‌سازی فیزیک-آگاه فرآیندهای پتروشیمی خراسان.
+Physics-informed simulation core of Khorasan Petrochemical processes.
 
-این ماژول منطق ریاضی مشترکی را در بر می‌گیرد که هم برای تولید دیتاست سنتتیک
-(``data_generator.py``) و هم برای محیط یادگیری تقویتی گام‌به‌گام (``env.py``)
-استفاده می‌شود، تا فیزیک شبیه‌سازی فقط یک‌بار نوشته و نگهداری شود.
+This module contains the shared mathematical logic used both to generate the synthetic dataset
+(``data_generator.py``) and for the step-by-step reinforcement learning environment (``env.py``),
+so that the simulation physics is written and maintained only once.
 
-مدل‌ها ساده‌شده و تقریبی‌اند (موازنه جرم/انرژی درجه‌یک، نه شبیه‌سازی فرآیندی
-دقیق CFD/ترمودینامیکی)؛ هدف تولید رفتاری فیزیکاً معقول و پاسخگو به اقدامات
-کنترلی برای آموزش عامل RL است، نه جایگزینی برای شبیه‌سازهای فرآیندی صنعتی
-(مثل Aspen HYSYS/Plus).
+The models are simplified and approximate (first-order mass/energy balance, not an accurate
+CFD/thermodynamic process simulation); the goal is to produce physically reasonable behavior that responds to
+control actions for training the RL agent, not to replace industrial process simulators
+(such as Aspen HYSYS/Plus).
 
-سه اقدام «control_valve_pct»، «heat_recovery_ratio_pct» و «aux_fuel_pct» در
-سند SRS (بخش ۲-۴-۱) وجود دارند اما تجهیزات متناظرشان در منابع اولیه پروژه
-مدل فیزیکی تفصیلی نداشتند؛ این‌جا با ضرایب ساده و مستندشده به مدل انرژی/بازده
-متصل شده‌اند (به کامنت‌های APPROX در کد مراجعه کنید).
+The three actions "control_valve_pct", "heat_recovery_ratio_pct" and "aux_fuel_pct" exist in
+the SRS (section 2-4-1) but their corresponding equipment in the project's primary sources
+had no detailed physical model; here they are connected to the energy/efficiency model
+with simple, documented coefficients (see the APPROX comments in the code).
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ def _add_noise(
     min_val: float | None = None,
     max_val: float | None = None,
 ) -> float:
-    """افزودن نویز گاوسی نسبی با محدودسازی اختیاری."""
+    """Add relative Gaussian noise with optional clipping."""
     noisy = value + rng.normal(0.0, noise_std * abs(value) + 1e-9)
     if min_val is not None:
         noisy = max(noisy, min_val)
@@ -60,7 +60,7 @@ def sample_feed_composition(rng: np.random.Generator) -> dict[str, float]:
 
 
 def sample_disturbances(rng: np.random.Generator) -> dict[str, Any]:
-    """نمونه‌برداری کامل اختلالات غیرقابل‌کنترل یک گام/روز."""
+    """Complete sampling of the uncontrollable disturbances of one step/day."""
     return {
         "feed_composition": sample_feed_composition(rng),
         "coking_factor": rng.uniform(*DISTURBANCE_RANGES["coking_factor"]),
@@ -81,12 +81,12 @@ def sample_prices(rng: np.random.Generator) -> dict[str, float]:
 
 
 def sample_action(rng: np.random.Generator) -> dict[str, float]:
-    """نمونه‌برداری تصادفی از فضای اقدام (برای دیتاست سنتتیک یا baseline)."""
+    """Random sampling from the action space (for the synthetic dataset or baseline)."""
     return {key: rng.uniform(lo, hi) for key, (lo, hi) in ACTION_SPACE.items()}
 
 
 def clip_action(action: dict[str, float]) -> dict[str, float]:
-    """اطمینان از قرارگیری هر بعد اقدام درون بازه مجاز فضای اقدام."""
+    """Ensure each action dimension lies within the allowed range of the action space."""
     clipped = {}
     for key, (lo, hi) in ACTION_SPACE.items():
         clipped[key] = float(np.clip(action.get(key, (lo + hi) / 2), lo, hi))
@@ -94,7 +94,7 @@ def clip_action(action: dict[str, float]) -> dict[str, float]:
 
 
 def count_violations(action: dict[str, float], tol: float = 1e-6) -> int:
-    """شمارش ابعادی از اقدام خام که پیش از کلیپ‌شدن خارج از محدوده بوده‌اند."""
+    """Count the dimensions of the raw action that were out of range before clipping."""
     violations = 0
     for key, (lo, hi) in ACTION_SPACE.items():
         value = action.get(key)
@@ -111,7 +111,7 @@ def _simulate_reformer(
     feed_composition: dict[str, float],
     coking_factor: float,
 ) -> dict[str, float]:
-    """شبیه‌سازی ریفرمر بر اساس موازنه جرم و انرژی ساده‌شده."""
+    """Reformer simulation based on simplified mass and energy balance."""
     S_C_ratio = action["S_C_ratio"]
     T_primary = action["T_primary_reformer"]
     T_secondary = action["T_secondary_reformer"]
@@ -122,23 +122,23 @@ def _simulate_reformer(
 
     steam_flow = feed_flow * S_C_ratio * 0.012
 
-    # اثر کک‌زدگی بر راندمان
+    # Effect of coking on efficiency
     efficiency_factor = 1.0 - coking_factor * 0.3
-    # APPROX: شیرهای کنترلی کاملاً باز (100%) بهینه فرض می‌شوند؛ بسته‌بودن جزئی
-    # افت فشار/راندمان کوچکی ایجاد می‌کند.
+    # APPROX: fully open control valves (100%) are assumed optimal; partial closure
+    # creates a small pressure drop/efficiency loss.
     efficiency_factor *= 0.95 + 0.05 * (control_valve_pct / 100.0)
 
-    # بازده تبدیل متان بر اساس دما (مدل ساده آرنیوس)
+    # Methane conversion efficiency based on temperature (simple Arrhenius model)
     k_primary = 0.85 * (1 + 0.003 * (T_primary - 800)) * efficiency_factor
-    # APPROX: دبی هوای ریفرمر ثانویه حول یک مقدار اسمی نوسان می‌کند؛ کمبود هوا
-    # نسبت به اسمی، تبدیل ثانویه را کاهش می‌دهد.
-    air_ratio = secondary_air_pct / 75.0  # 75% ≈ نقطه اسمی
+    # APPROX: the secondary reformer air flow fluctuates around a nominal value; an air shortage
+    # relative to nominal reduces the secondary conversion.
+    air_ratio = secondary_air_pct / 75.0  # 75% ≈ nominal point
     k_secondary = (
         0.92 * (1 + 0.002 * (T_secondary - 1000)) * efficiency_factor
         * (0.9 + 0.1 * np.clip(air_ratio, 0.5, 1.5))
     )
 
-    # ترکیب گاز سنتز
+    # Syngas composition
     H2_fraction = 0.60 + 0.02 * (T_primary - 800) / 50 + 0.01 * (1 - coking_factor)
     N2_fraction = 0.20 + 0.01 * (feed_composition["N2"] - 0.02) / 0.01
     CH4_fraction = 0.15 - 0.02 * (T_primary - 800) / 50 - 0.01 * k_primary
@@ -150,12 +150,12 @@ def _simulate_reformer(
     CH4_fraction /= total
     Ar_fraction /= total
 
-    # APPROX: سوخت کمکی، ظرفیت تبدیل گاز سنتز را افزایش می‌دهد اما مصرف
-    # انرژی و انتشار را نیز بالا می‌برد (رجوع کنید به _calculate_emissions).
+    # APPROX: auxiliary fuel increases the syngas conversion capacity but also raises energy
+    # consumption and emissions (see _calculate_emissions).
     aux_boost = 1.0 + 0.05 * (aux_fuel_pct / 100.0)
 
     energy_consumption = feed_flow * 2.5 * (1 - 0.1 * coking_factor)
-    # APPROX: بازیابی حرارت بخشی از انرژی مصرفی خالص را جبران می‌کند.
+    # APPROX: heat recovery offsets part of the net energy consumed.
     heat_recovery_savings = 0.15 * (heat_recovery_ratio_pct - 50) / 40
     energy_consumption *= (1 - np.clip(heat_recovery_savings, 0.0, 0.15))
     energy_consumption += aux_fuel_pct / 100.0 * 0.05 * feed_flow / 1000.0
@@ -185,7 +185,7 @@ def _simulate_ammonia_synthesis(
     T_reactor: float,
     compressor_speed_pct: float,
 ) -> dict[str, float]:
-    """شبیه‌سازی سنتز آمونیاک با سینتیک واکنش ساده‌شده."""
+    """Ammonia synthesis simulation with simplified reaction kinetics."""
     H2_N2_ratio = H2_fraction / N2_fraction if N2_fraction > 0 else 3.0
 
     conversion = 0.85 * (1 + 0.005 * (P_reactor - 180) / 10) * (
@@ -222,14 +222,14 @@ def _calculate_emissions(
 ) -> float:
     combustion_co2 = feed_flow * 0.002 * (1 - efficiency * 0.1)
     process_co2 = feed_flow * 0.0005
-    # APPROX: سوخت کمکی احتراق اضافه‌ای تولید می‌کند.
+    # APPROX: auxiliary fuel produces additional combustion.
     aux_co2 = aux_fuel_pct / 100.0 * feed_flow * 0.0003
     return combustion_co2 + process_co2 + aux_co2
 
 
 @dataclass
 class StepResult:
-    """خروجی کامل یک گام شبیه‌سازی، شامل حالت، اقتصاد و پاداش."""
+    """Complete output of one simulation step, including state, economics and reward."""
 
     observation: dict[str, float]
     profit: float
@@ -248,9 +248,9 @@ def simulate_step(
     add_noise: bool = True,
 ) -> StepResult:
     """
-    اجرای یک گام کامل شبیه‌سازی زنجیره تولید: ریفرمر → سنتز آمونیاک → اوره →
-    ملامین → انتشار → اقتصاد. ``action`` باید شامل تمام کلیدهای
-    ``config.ACTION_SPACE`` باشد (خام، قبل یا بعد از کلیپ).
+    Run one complete step of the production chain simulation: reformer → ammonia synthesis → urea →
+    melamine → emissions → economics. ``action`` must include all keys of
+    ``config.ACTION_SPACE`` (raw, before or after clipping).
     """
     raw_action = dict(action)
     violations = count_violations(raw_action)

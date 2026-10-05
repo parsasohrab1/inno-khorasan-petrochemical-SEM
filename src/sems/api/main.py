@@ -1,10 +1,10 @@
 """
-API سامانه مدیریت انرژی هوشمند (SEMS) پتروشیمی خراسان.
+API of the Smart Energy Management System (SEMS) for Khorasan Petrochemical.
 
-پیاده‌سازی خروجی‌های بخش ۲-۴-۲ SRS: توصیه کنترلی، پیش‌بینی مصرف انرژی/انتشار،
-هشدار پیشگیرانه و گزارش دوره‌ای. توجه: این API یک نمونه نرم‌افزاری برای دمو و
-توسعه است، نه یک استقرار صنعتی با تضمین ۹۹.۹۹٪ در دسترس‌بودن یا اتصال واقعی
-SCADA/OPC UA (به README برای ماتریس ردیابی الزامات مراجعه کنید).
+Implementation of the section 2-4-2 SRS outputs: control recommendation, energy consumption/emission forecasting,
+preventive alerting and periodic reporting. Note: this API is a software sample for demo and
+development, not an industrial deployment with a 99.99% availability guarantee or real
+SCADA/OPC UA connection (see the README for the requirements traceability matrix).
 """
 
 from __future__ import annotations
@@ -27,8 +27,8 @@ from sems.evaluate import evaluate_with_model
 from sems.forecasting import detect_inefficiency, forecast_horizon
 
 app = FastAPI(
-    title="SEMS پتروشیمی خراسان",
-    description="سامانه مدیریت انرژی هوشمند مبتنی بر یادگیری تقویتی",
+    title="SEMS Khorasan Petrochemical",
+    description="Smart energy management system based on reinforcement learning",
     version="0.1.0",
 )
 
@@ -47,7 +47,7 @@ def health() -> dict:
 @app.post("/auth/token", response_model=TokenResponse)
 def login(form_data: OAuth2PasswordRequestForm = Depends()) -> TokenResponse:
     if not security.authenticate_user(form_data.username, form_data.password):
-        raise HTTPException(status_code=401, detail="نام کاربری یا رمز عبور نادرست است")
+        raise HTTPException(status_code=401, detail="Incorrect username or password")
     token = security.create_access_token(subject=form_data.username)
     return TokenResponse(access_token=token)
 
@@ -88,7 +88,7 @@ def forecast_energy(
 def forecast_emissions(
     horizon_steps: int = STEPS_PER_EPISODE, _user: str = Depends(security.get_current_user)
 ) -> ForecastResponse:
-    # از همان rollout پیش‌بینی انرژی استفاده می‌شود چون هر دو خروجی یک شبیه‌سازی مشترک‌اند.
+    # The same energy forecast rollout is used since both outputs come from a shared simulation.
     model = deps.get_model()
     result = forecast_horizon(model=model, steps=horizon_steps)
     return ForecastResponse(**result, model_status=deps.model_status())
@@ -107,7 +107,7 @@ def report(period: str, _user: str = Depends(security.get_current_user)) -> Repo
     if period not in REPORT_PERIOD_STEPS:
         raise HTTPException(
             status_code=400,
-            detail=f"دوره نامعتبر. یکی از {list(REPORT_PERIOD_STEPS.keys())} را انتخاب کنید.",
+            detail=f"Invalid period. Choose one of {list(REPORT_PERIOD_STEPS.keys())}.",
         )
     steps = REPORT_PERIOD_STEPS[period]
     model = deps.get_model()

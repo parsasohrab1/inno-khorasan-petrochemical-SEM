@@ -1,4 +1,4 @@
-"""وابستگی‌های مشترک API: بارگذاری تنبل مدل آموزش‌دیده و ساخت مشاهده از ورودی کاربر."""
+"""Shared API dependencies: lazy loading of the trained model and building an observation from user input."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ _rng = np.random.default_rng(RANDOM_SEED)
 
 @lru_cache(maxsize=1)
 def get_model() -> PPO | None:
-    """بارگذاری تنبل مدل PPO؛ در نبود فایل مدل، None برمی‌گرداند (fallback baseline)."""
+    """Lazy loading of the PPO model; returns None if there is no model file (baseline fallback)."""
     if not os.path.exists(MODEL_PATH):
         return None
     return PPO.load(MODEL_PATH)
@@ -31,7 +31,7 @@ def model_status() -> str:
 
 
 def inputs_to_disturbances_prices(inputs: ProcessInputs) -> tuple[dict, dict]:
-    """تبدیل ورودی درخواست API به دیکشنری‌های disturbances/prices مورد نیاز simulator."""
+    """Convert the API request input into the disturbances/prices dictionaries required by the simulator."""
     disturbances = {
         "feed_flow": inputs.feed_flow,
         "feed_composition": {
@@ -56,7 +56,7 @@ def inputs_to_disturbances_prices(inputs: ProcessInputs) -> tuple[dict, dict]:
 
 
 def build_observation(inputs: ProcessInputs) -> tuple[np.ndarray, dict, dict]:
-    """ساخت بردار مشاهده مطابق OBS_KEYS از ورودی کاربر + اقدام قبلی/میانی."""
+    """Build the observation vector per OBS_KEYS from user input + previous/mid-range action."""
     disturbances, prices = inputs_to_disturbances_prices(inputs)
     previous_action = inputs.previous_action or {
         key: (lo + hi) / 2 for key, (lo, hi) in ACTION_SPACE.items()
@@ -68,7 +68,7 @@ def build_observation(inputs: ProcessInputs) -> tuple[np.ndarray, dict, dict]:
 
 
 def recommend_action(inputs: ProcessInputs) -> tuple[dict[str, float], str]:
-    """پیشنهاد اقدام کنترلی بعدی بر اساس مدل آموزش‌دیده (یا baseline در نبود مدل)."""
+    """Suggest the next control action based on the trained model (or baseline if there is no model)."""
     model = get_model()
     obs_array, _disturbances, _prices = build_observation(inputs)
 
@@ -82,7 +82,7 @@ def recommend_action(inputs: ProcessInputs) -> tuple[dict[str, float], str]:
 
 
 def evaluate_recommendation(inputs: ProcessInputs) -> tuple[dict[str, float], StepResult, str]:
-    """پیشنهاد اقدام + شبیه‌سازی نتیجه اعمال آن روی شرایط فعلی (برای /recommend و /alerts)."""
+    """Suggest an action + simulate the result of applying it to current conditions (for /recommend and /alerts)."""
     action, status_str = recommend_action(inputs)
     disturbances, prices = inputs_to_disturbances_prices(inputs)
     result = simulate_step(action, disturbances, prices, _rng, add_noise=False)

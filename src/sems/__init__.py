@@ -1,9 +1,9 @@
-"""سامانه مدیریت انرژی هوشمند (SEMS) پتروشیمی خراسان."""
+"""Smart Energy Management System (SEMS) for Khorasan Petrochemical."""
 
 import sys
 
-# کنسول ویندوز معمولاً از codepage قدیمی (مثل cp1256) استفاده می‌کند که همه
-# نویسه‌های فارسی/یونیکد را پشتیبانی نمی‌کند؛ خروجی را به UTF-8 تغییر می‌دهیم.
+# The Windows console usually uses an old codepage (such as cp1256) that does not support all
+# Persian/Unicode characters; we switch the output to UTF-8.
 if sys.platform == "win32":
     for _stream in (sys.stdout, sys.stderr):
         if hasattr(_stream, "reconfigure"):

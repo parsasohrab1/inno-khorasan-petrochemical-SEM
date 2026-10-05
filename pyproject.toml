@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sems"
 version = "0.1.0"
-description = "سامانه مدیریت انرژی هوشمند پتروشیمی خراسان مبتنی بر یادگیری تقویتی"
+description = "Smart Energy Management System for Khorasan Petrochemical based on reinforcement learning"
 requires-python = ">=3.10"
 
 [tool.setuptools.packages.find]

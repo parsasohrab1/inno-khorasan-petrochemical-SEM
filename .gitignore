@@ -10,7 +10,7 @@ build/
 *.egg-info/
 .pytest_cache/
 
-# خروجی‌های زمان اجرا SEMS
+# SEMS runtime outputs
 /data/*
 !/data/.gitkeep
 /models/*
@@ -18,5 +18,5 @@ build/
 /reports/*
 !/reports/.gitkeep
 
-# محرمانه - هرگز کامیت نشود
+# Confidential - never commit
 /private/

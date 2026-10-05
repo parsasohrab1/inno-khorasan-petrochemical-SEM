@@ -1,7 +1,7 @@
 """
-آموزش عامل یادگیری تقویتی (PPO) روی محیط KhorasanEnergyEnv.
+Train the reinforcement learning agent (PPO) on the KhorasanEnergyEnv environment.
 
-مثال اجرا:
+Example run:
     python -m sems.train --timesteps 100000 --model-path models/ppo_khorasan.zip
 """
 
@@ -38,12 +38,12 @@ def train(timesteps: int, model_path: str, seed: int = RANDOM_SEED, n_envs: int 
     out_path = Path(model_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     model.save(str(out_path))
-    print(f"\n✅ مدل آموزش‌دیده در {out_path} ذخیره شد.")
+    print(f"\n✅ The trained model was saved in {out_path}.")
     return model
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="آموزش عامل PPO برای SEMS")
+    parser = argparse.ArgumentParser(description="Train the PPO agent for SEMS")
     parser.add_argument("--timesteps", type=int, default=50_000)
     parser.add_argument("--model-path", type=str, default="models/ppo_khorasan.zip")
     parser.add_argument("--seed", type=int, default=RANDOM_SEED)

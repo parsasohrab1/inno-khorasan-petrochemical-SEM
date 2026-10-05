@@ -1,161 +1,161 @@
 # inno-khorasan-petrochemical-SEM
 
-سامانه مدیریت انرژی هوشمند پتروشیمی خراسان مبتنی بر یادگیری تقویتی
-۱. مطالعه و شناخت پتروشیمی خراسان
-۱-۱. مشخصات کلی شرکت
-شرکت پتروشیمی خراسان (KHPC) در سال ۱۳۷۱ در بجنورد، مرکز استان خراسان شمالی تأسیس شده و فاز نخست آن در سال ۱۳۷۵ به بهره‌برداری رسیده است. این مجتمع با مساحتی بالغ بر ۲۰۴ هکتار در کیلومتر ۱۷ جاده بجنورد-شیروان واقع شده است.
+Smart Energy Management System for Khorasan Petrochemical Based on Reinforcement Learning
+1. Study and Understanding of Khorasan Petrochemical
+1-1. General Company Profile
+Khorasan Petrochemical Company (KHPC) was established in 1371 [1992] in Bojnourd, the capital of North Khorasan Province, and its first phase was commissioned in 1375 [1996]. The complex covers an area of more than 204 hectares at kilometer 17 of the Bojnourd-Shirvan road.
 
-محصولات اصلی:
+Main products:
 
-آمونیاک (ظرفیت تولید سالانه ۳۳۰ هزار تن)
+Ammonia (annual production capacity 330 thousand tons)
 
-اوره پریل (ظرفیت تولید سالانه ۴۹۵ هزار تن)
+Urea prill (annual production capacity 495 thousand tons)
 
-کریستال ملامین (ظرفیت تولید سالانه ۲۰ هزار تن)
+Melamine crystal (annual production capacity 20 thousand tons)
 
-ازت مایع
+Liquid nitrogen
 
-مالکیت: شرکت سرمایه‌گذاری نفت، گاز و پتروشیمی تأمین (تاپیکو)
+Ownership: Tamin Oil, Gas and Petrochemical Investment Company (TAPICO)
 
-۱-۲. فرآیندهای تولید و مصرف انرژی
-فرآیند تولید به صورت زنجیره‌ای است: خوراک گاز طبیعی وارد واحد تولید آمونیاک می‌شود، آمونیاک تولیدی به واحد اوره ارسال می‌شود و بخشی از آمونیاک و اوره به عنوان خوراک واحد تولید کریستال ملامین مصرف می‌شود.
+1-2. Production Processes and Energy Consumption
+The production process is chained: natural gas feed enters the ammonia production unit, the produced ammonia is sent to the urea unit, and part of the ammonia and urea is consumed as feed for the melamine crystal production unit.
 
-مصارف انرژی کلیدی:
+Key energy consumption:
 
-گاز طبیعی به عنوان خوراک و سوخت اصلی
+Natural gas as the main feed and fuel
 
-برق مصرفی برای تجهیزات دوار و سیستم‌های تبرید
+Electricity for rotating equipment and refrigeration systems
 
-بخار فرآیندی در واحدهای مختلف
+Process steam in the various units
 
-شاخص‌های مصرف انرژی ویژه (SEC):
+Specific energy consumption (SEC) indicators:
 
-واحد آمونیاک: ۶۲.۶۱ گیگاژول بر تن محصول (۵.۵٪ کمتر از استاندارد ملی)
+Ammonia unit: 62.61 GJ per ton of product (5.5% below the national standard)
 
-واحد اوره: ۴.۵۲ گیگاژول بر تن محصول (۵.۹۷٪ کمتر از استاندارد ملی)
+Urea unit: 4.52 GJ per ton of product (5.97% below the national standard)
 
-اتلاف اگزرژی در واحد آمونیاک (بر اساس مطالعه موجود):
+Exergy destruction in the ammonia unit (based on an existing study):
 
-بخش	اتلاف اگزرژی (GJ/h)
-تولید گاز سنتز	۴۲
-راکتور شیفت	۳۶
-جداسازی CO₂	۳۱
-سنتز آمونیاک	۶۹
-تبرید	۱۲
-متاناسیون	۲
-۱-۳. انتشار گازهای گلخانه‌ای
-بر اساس مطالعات انجام‌شده، بیشترین اثرات سوء زیست‌محیطی واحد آمونیاک مرتبط با سلامت انسان بوده و عمدتاً ناشی از مصرف متان، بخار و انتشارات واحد آمونیاک و گاز طبیعی است. صنعت پتروشیمی به طور کلی حدود ۱۴٪ از کل مصرف انرژی صنعتی و نزدیک به ۱.۵ گیگاتن انتشار CO₂ در سال را به خود اختصاص داده است.
+Section	Exergy destruction (GJ/h)
+Syngas production	42
+Shift reactor	36
+CO₂ separation	31
+Ammonia synthesis	69
+Refrigeration	12
+Methanation	2
+1-3. Greenhouse Gas Emissions
+According to the studies conducted, the greatest adverse environmental impacts of the ammonia unit are related to human health and are mainly caused by the consumption of methane and steam and by emissions from the ammonia unit and natural gas. The petrochemical industry as a whole accounts for about 14% of total industrial energy consumption and nearly 1.5 gigatons of CO₂ emissions per year.
 
-۲. مستندات الزامات نرم‌افزاری (SRS)
-۲-۱. هدف سیستم
-طراحی، توسعه و استقرار سامانه مدیریت انرژی هوشمند (Smart Energy Management System - SEMS) مبتنی بر یادگیری تقویتی (Reinforcement Learning) جهت بهینه‌سازی پویای مصرف انرژی، کاهش انتشار گازهای گلخانه‌ای و افزایش بهره‌وری اقتصادی در مجتمع پتروشیمی خراسان.
+2. Software Requirements Specification (SRS)
+2-1. System Purpose
+Design, development and deployment of a Smart Energy Management System (SEMS) based on Reinforcement Learning for dynamic optimization of energy consumption, reduction of greenhouse gas emissions and improvement of economic productivity at the Khorasan Petrochemical complex.
 
-۲-۲. محدوده سیستم
-سیستم کلیه واحدهای تولیدی شامل:
+2-2. System Scope
+The system covers all production units, including:
 
-واحد تولید آمونیاک
+Ammonia production unit
 
-واحد تولید اوره
+Urea production unit
 
-واحد تولید کریستال ملامین
+Melamine crystal production unit
 
-واحد یوتیلیتی (تولید بخار، برق، آب خنک‌کننده، هوای فشرده، ازت مایع)
+Utility unit (steam, electricity, cooling water, compressed air, liquid nitrogen production)
 
-۲-۳. ورودی‌های سیستم (Inputs)
-۲-۳-۱. داده‌های عملیاتی بلادرنگ (از SCADA و IoT)
-شماره	نام داده	واحد	منبع	نرخ نمونه‌برداری
-1	دمای خروجی ریفرمر اولیه	°C	SCADA	1 ثانیه
-2	دمای خروجی ریفرمر ثانویه	°C	SCADA	1 ثانیه
-3	فشار راکتور سنتز آمونیاک	bar	SCADA	1 ثانیه
-4	دمای راکتور سنتز آمونیاک	°C	SCADA	1 ثانیه
-5	دبی خوراک گاز طبیعی ورودی	Nm³/h	Flow Meter	1 ثانیه
-6	دبی هواي ورودی به ریفرمر	Nm³/h	Flow Meter	1 ثانیه
-7	دبی بخار ورودی به فرآیند	ton/h	Flow Meter	1 ثانیه
-8	توان مصرفی کمپرسورهای اصلی	MW	Power Meter	1 ثانیه
-9	توان مصرفی پمپ‌های اصلی	kW	Power Meter	1 ثانیه
-10	دمای آب خنک‌کننده ورودی/خروجی	°C	Temperature Sensor	5 ثانیه
-11	دبی آب خنک‌کننده سیرکوله	m³/h	Flow Meter	5 ثانیه
-12	فشار بخار تولیدی یوتیلیتی	bar	Pressure Sensor	1 ثانیه
-13	دمای بخار تولیدی	°C	Temperature Sensor	1 ثانیه
-14	ترکیب گاز خوراک (CH₄, C₂H₆, C₃H₈, N₂, CO₂)	%	GC Analyzer	15 دقیقه
-15	ترکیب گاز سنتز خروجی (H₂, N₂, CH₄, Ar)	%	GC Analyzer	15 دقیقه
-16	دبی آمونیاک مایع تولیدی	ton/h	Flow Meter	1 دقیقه
-17	دبی اوره تولیدی	ton/h	Flow Meter	1 دقیقه
-18	دبی ملامین تولیدی	ton/h	Flow Meter	1 دقیقه
-19	دمای محیط	°C	Weather Station	1 دقیقه
-20	رطوبت نسبی محیط	%	Weather Station	1 دقیقه
-۲-۳-۲. داده‌های اقتصادی
-شماره	نام داده	واحد	منبع	نرخ به‌روزرسانی
-21	قیمت گاز طبیعی خوراک	IRR/Nm³	سیستم مالی	روزانه
-22	قیمت برق مصرفی	IRR/kWh	سیستم مالی	روزانه
-23	قیمت فروش آمونیاک	IRR/ton	سیستم مالی	روزانه
-24	قیمت فروش اوره	IRR/ton	سیستم مالی	روزانه
-25	قیمت فروش ملامین	IRR/ton	سیستم مالی	روزانه
-26	نرخ ارز مرجع	IRR/USD	سیستم مالی	روزانه
-27	قیمت گواهی کاهش انتشار کربن	IRR/ton CO₂	سیستم مالی	روزانه
-۲-۳-۳. داده‌های عملیاتی و محدودیت‌ها
-شماره	نام داده	توضیح
-28	وضعیت تجهیزات (آنلاین/آفلاین/تعمیرات)	وضعیت عملیاتی هر تجهیز کلیدی
-29	برنامه تعمیرات پیشگیرانه	زمان‌بندی تعمیرات برنامه‌ریزی‌شده
-30	محدودیت‌های عملیاتی ایمنی	دما، فشار و دبی‌های حد مجاز
-31	وضعیت کک‌زدگی کویل‌های ریفرمر	شاخص تخمینی مقاومت حرارتی
-۲-۳-۴. داده‌های محیطی و پایداری
-شماره	نام داده	واحد	منبع
-32	انتشار CO₂ لحظه‌ای	ton/h	محاسبه‌شده از دبی سوخت
-33	انتشار NOx	ppm	آنالایزر دودکش
-34	مصرف ویژه انرژی (SEC) آمونیاک	GJ/ton	محاسبه‌شده
-35	مصرف ویژه انرژی (SEC) اوره	GJ/ton	محاسبه‌شده
-۲-۴. خروجی‌های سیستم (Outputs)
-۲-۴-۱. خروجی‌های کنترلی (Action Space)
-شماره	اقدام کنترلی	محدوده	واحد
-1	نسبت بخار به کربن (S/C) ریفرمر	۲.۵ – ۴.۰	mol/mol
-2	دمای خروجی ریفرمر اولیه (COT)	۷۵۰ – ۸۵۰	°C
-3	دمای خروجی ریفرمر ثانویه	۹۵۰ – ۱۰۵۰	°C
-4	فشار عملیاتی سنتز آمونیاک	۱۲۰ – ۲۵۰	bar
-5	دبی هوای ورودی به ریفرمر ثانویه	۵۰ – ۱۰۰	% ظرفیت
-6	دمای آب خنک‌کننده هدف	۲۵ – ۴۰	°C
-7	دبی گردش آب خنک‌کننده	۵۰ – ۱۰۰	% ظرفیت
-8	توان کمپرسورهای اصلی (سرعت)	۶۰ – ۱۰۰	%
-9	نسبت بازیابی حرارت	۵۰ – ۹۰	%
-10	دبی سوخت کمکی (در صورت نیاز)	۰ – ۱۰۰	% ظرفیت
-11	تنظیمات شیرهای کنترلی کلیدی	۰ – ۱۰۰	% گشودگی
-۲-۴-۲. خروجی‌های پیش‌بینی و گزارش‌دهی
-شماره	خروجی	توضیح
-12	پیش‌بینی مصرف انرژی ۲۴ ساعت آینده	بر اساس الگوهای تاریخی و شرایط پیش‌بینی‌شده
-13	پیش‌بینی انتشار CO₂	بر اساس سناریوهای عملیاتی مختلف
-14	شناسایی ناکارآمدی‌های انرژی	تشخیص نقاط اتلاف انرژی با دقت بالا
-15	هشدارهای پیشگیرانه	هشدار در صورت انحراف از شرایط بهینه
-16	داشبورد مدیریت انرژی	نمایش لحظه‌ای شاخص‌های کلیدی عملکرد انرژی
-17	گزارش‌های دوره‌ای	گزارش‌های روزانه، هفتگی و ماهانه مصرف انرژی
-18	توصیه‌های بهینه‌سازی	پیشنهادات عملی برای بهبود بهره‌وری انرژی
-۲-۵. الزامات غیرعملیاتی
-۲-۵-۱. الزامات عملکردی
-تأخیر پاسخ کنترلی کمتر از ۵۰۰ میلی‌ثانیه
+2-3. System Inputs
+2-3-1. Real-time operational data (from SCADA and IoT)
+No.	Data name	Unit	Source	Sampling rate
+1	Primary reformer outlet temperature	°C	SCADA	1 second
+2	Secondary reformer outlet temperature	°C	SCADA	1 second
+3	Ammonia synthesis reactor pressure	bar	SCADA	1 second
+4	Ammonia synthesis reactor temperature	°C	SCADA	1 second
+5	Natural gas feed inlet flow	Nm³/h	Flow Meter	1 second
+6	Air flow into the reformer	Nm³/h	Flow Meter	1 second
+7	Steam flow into the process	ton/h	Flow Meter	1 second
+8	Power consumption of main compressors	MW	Power Meter	1 second
+9	Power consumption of main pumps	kW	Power Meter	1 second
+10	Cooling water inlet/outlet temperature	°C	Temperature Sensor	5 seconds
+11	Circulating cooling water flow	m³/h	Flow Meter	5 seconds
+12	Utility steam pressure produced	bar	Pressure Sensor	1 second
+13	Steam temperature produced	°C	Temperature Sensor	1 second
+14	Feed gas composition (CH₄, C₂H₆, C₃H₈, N₂, CO₂)	%	GC Analyzer	15 minutes
+15	Syngas outlet composition (H₂, N₂, CH₄, Ar)	%	GC Analyzer	15 minutes
+16	Liquid ammonia production flow	ton/h	Flow Meter	1 minute
+17	Urea production flow	ton/h	Flow Meter	1 minute
+18	Melamine production flow	ton/h	Flow Meter	1 minute
+19	Ambient temperature	°C	Weather Station	1 minute
+20	Ambient relative humidity	%	Weather Station	1 minute
+2-3-2. Economic data
+No.	Data name	Unit	Source	Update rate
+21	Natural gas feed price	IRR/Nm³	Financial system	Daily
+22	Electricity price	IRR/kWh	Financial system	Daily
+23	Ammonia selling price	IRR/ton	Financial system	Daily
+24	Urea selling price	IRR/ton	Financial system	Daily
+25	Melamine selling price	IRR/ton	Financial system	Daily
+26	Reference exchange rate	IRR/USD	Financial system	Daily
+27	Carbon emission reduction certificate price	IRR/ton CO₂	Financial system	Daily
+2-3-3. Operational data and constraints
+No.	Data name	Description
+28	Equipment status (online/offline/maintenance)	Operational status of each key equipment
+29	Preventive maintenance schedule	Planned maintenance scheduling
+30	Operational safety constraints	Allowable temperature, pressure and flow limits
+31	Reformer coil coking status	Estimated thermal resistance index
+2-3-4. Environmental and sustainability data
+No.	Data name	Unit	Source
+32	Instantaneous CO₂ emission	ton/h	Calculated from fuel flow
+33	NOx emission	ppm	Stack analyzer
+34	Specific energy consumption (SEC) of ammonia	GJ/ton	Calculated
+35	Specific energy consumption (SEC) of urea	GJ/ton	Calculated
+2-4. System Outputs
+2-4-1. Control outputs (Action Space)
+No.	Control action	Range	Unit
+1	Reformer steam-to-carbon ratio (S/C)	2.5 – 4.0	mol/mol
+2	Primary reformer outlet temperature (COT)	750 – 850	°C
+3	Secondary reformer outlet temperature	950 – 1050	°C
+4	Ammonia synthesis operating pressure	120 – 250	bar
+5	Air flow into the secondary reformer	50 – 100	% capacity
+6	Target cooling water temperature	25 – 40	°C
+7	Cooling water circulation flow	50 – 100	% capacity
+8	Main compressors power (speed)	60 – 100	%
+9	Heat recovery ratio	50 – 90	%
+10	Auxiliary fuel flow (if needed)	0 – 100	% capacity
+11	Key control valve settings	0 – 100	% opening
+2-4-2. Prediction and reporting outputs
+No.	Output	Description
+12	Energy consumption forecast for the next 24 hours	Based on historical patterns and forecast conditions
+13	CO₂ emission forecast	Based on different operational scenarios
+14	Identification of energy inefficiencies	High-accuracy detection of energy loss points
+15	Preventive alerts	Alert when deviating from optimal conditions
+16	Energy management dashboard	Real-time display of key energy performance indicators
+17	Periodic reports	Daily, weekly and monthly energy consumption reports
+18	Optimization recommendations	Practical suggestions for improving energy efficiency
+2-5. Non-Operational Requirements
+2-5-1. Performance requirements
+Control response latency of less than 500 milliseconds
 
-دقت پیش‌بینی مصرف انرژی با خطای کمتر از ۵٪
+Energy consumption prediction accuracy with an error of less than 5%
 
-ضریب اطمینان خروجی‌ها ≥ ۹۵٪
+Output confidence factor ≥ 95%
 
-قابلیت اجرا بر روی سرورهای صنعتی با در دسترس بودن ۹۹.۹۹٪
+Ability to run on industrial servers with 99.99% availability
 
-۲-۵-۲. الزامات امنیتی
-احراز هویت چندمرحله‌ای برای دسترسی به سیستم
+2-5-2. Security requirements
+Multi-step authentication for system access
 
-ثبت کامل لاگ‌های عملیاتی
+Complete logging of operations
 
-رمزنگاری ارتباطات (TLS 1.3)
+Communication encryption (TLS 1.3)
 
-پشتیبان‌گیری خودکار با دوره ۶ ساعته
+Automatic backup with a 6-hour cycle
 
-۲-۵-۳. الزامات یکپارچه‌سازی
-سازگاری با پروتکل‌های صنعتی: OPC UA، Modbus TCP/IP، Profinet
+2-5-3. Integration requirements
+Compatibility with industrial protocols: OPC UA, Modbus TCP/IP, Profinet
 
-قابلیت اتصال به DCS موجود
+Ability to connect to the existing DCS
 
-خروجی API برای اتصال به سیستم‌های سطح بالای سازمانی
+API output for connecting to enterprise-level systems
 
-۳. تولید داده‌های سنتتیک برای آموزش عامل یادگیری تقویتی
-برای دستیابی به ضریب اطمینان بالا (≥۹۵%) و خطای پایین (≤۵%)، نیاز به حداقل ۱۰۰,۰۰۰ نمونه داده در بازه‌های زمانی مختلف داریم. کد زیر داده‌های سنتتیک با رویکرد فیزیک-آگاه (Physics-Informed) تولید می‌کند:
+3. Synthetic Data Generation for Training the Reinforcement Learning Agent
+To achieve a high confidence factor (≥95%) and low error (≤5%), we need at least 100,000 data samples over different time intervals. The following code generates synthetic data using a Physics-Informed approach:
 
 python
 import numpy as np
@@ -166,15 +166,15 @@ import random
 
 class KhorasanPetrochemicalDataGenerator:
     """
-    داده‌ساز سنتتیک برای پتروشیمی خراسان
-    مبتنی بر مدل‌های فیزیک-آگاه و محدودیت‌های ترمودینامیکی
+    Synthetic data generator for Khorasan Petrochemical
+    Based on physics-informed models and thermodynamic constraints
     """
     
     def __init__(self, seed=42):
         np.random.seed(seed)
         random.seed(seed)
         
-        # محدودیت‌های عملیاتی بر اساس اطلاعات واقعی
+        # Operational constraints based on real information
         self.limits = {
             'T_primary_reformer': (750, 850),      # °C
             'T_secondary_reformer': (950, 1050),    # °C
@@ -192,17 +192,17 @@ class KhorasanPetrochemicalDataGenerator:
             'melamine_production': (1.5, 3.0),      # ton/h
         }
         
-        # متغیرهای غیرقابل کنترل (اختلالات)
+        # Uncontrollable variables (disturbances)
         self.disturbances = {
             'feed_composition_CH4': (0.85, 0.95),
             'feed_composition_C2H6': (0.02, 0.08),
             'feed_composition_C3H8': (0.01, 0.04),
             'feed_composition_N2': (0.01, 0.03),
             'feed_composition_CO2': (0.005, 0.02),
-            'coking_factor': (0.0, 0.3),  # ضریب کاهش راندمان بر اثر کک‌زدگی
+            'coking_factor': (0.0, 0.3),  # efficiency reduction factor due to coking
         }
         
-        # هزینه‌ها و قیمت‌ها (IRR)
+        # Costs and prices (IRR)
         self.prices = {
             'gas_price': (5000, 8000),      # IRR per Nm3
             'electricity_price': (800, 1500), # IRR per kWh
@@ -213,7 +213,7 @@ class KhorasanPetrochemicalDataGenerator:
         }
         
     def _generate_time_series(self, n_samples, start_time=None):
-        """تولید سری زمانی با نمونه‌برداری ۱ ثانیه‌ای"""
+        """Generate a time series with 1-second sampling"""
         if start_time is None:
             start_time = datetime.now() - timedelta(days=30)
         
@@ -221,7 +221,7 @@ class KhorasanPetrochemicalDataGenerator:
         return timestamps
     
     def _add_noise(self, value, noise_std, min_val=None, max_val=None):
-        """افزودن نویز گاوسی با محدودیت"""
+        """Add Gaussian noise with limits"""
         noisy = value + np.random.normal(0, noise_std * abs(value))
         if min_val is not None:
             noisy = max(noisy, min_val)
@@ -232,33 +232,33 @@ class KhorasanPetrochemicalDataGenerator:
     def _simulate_reformer(self, feed_flow, S_C_ratio, T_primary, T_secondary, 
                            feed_composition, coking_factor):
         """
-        شبیه‌سازی ریفرمر بر اساس موازنه جرم و انرژی
-        بازگشت: دبی گاز سنتز، ترکیب، مصرف انرژی
+        Reformer simulation based on mass and energy balance
+        Returns: syngas flow, composition, energy consumption
         """
-        # محاسبه دبی بخار
-        steam_flow = feed_flow * S_C_ratio * 0.012  # تقریب تبدیل
+        # Calculate steam flow
+        steam_flow = feed_flow * S_C_ratio * 0.012  # conversion approximation
         
-        # اثر کک‌زدگی بر راندمان
+        # Effect of coking on efficiency
         efficiency_factor = 1.0 - coking_factor * 0.3
         
-        # بازده تبدیل متان بر اساس دما (مدل ساده آرنیوس)
+        # Methane conversion efficiency based on temperature (simple Arrhenius model)
         k_primary = 0.85 * (1 + 0.003 * (T_primary - 800)) * efficiency_factor
         k_secondary = 0.92 * (1 + 0.002 * (T_secondary - 1000)) * efficiency_factor
         
-        # ترکیب گاز سنتز
+        # Syngas composition
         H2_fraction = 0.60 + 0.02 * (T_primary - 800)/50 + 0.01 * (1 - coking_factor)
         N2_fraction = 0.20 + 0.01 * (feed_composition['N2'] - 0.02)/0.01
         CH4_fraction = 0.15 - 0.02 * (T_primary - 800)/50 - 0.01 * k_primary
         Ar_fraction = 0.02 + 0.01 * (feed_composition['N2'] - 0.02)/0.01
         
-        # نرمال‌سازی
+        # Normalization
         total = H2_fraction + N2_fraction + CH4_fraction + Ar_fraction
         H2_fraction /= total
         N2_fraction /= total
         CH4_fraction /= total
         Ar_fraction /= total
         
-        # مصرف انرژی ریفرمر
+        # Reformer energy consumption
         energy_consumption = feed_flow * 2.5 * (1 - 0.1 * coking_factor)  # GJ/h
         
         return {
@@ -275,21 +275,21 @@ class KhorasanPetrochemicalDataGenerator:
     def _simulate_ammonia_synthesis(self, syngas_flow, H2_fraction, N2_fraction, 
                                     P_reactor, T_reactor):
         """
-        شبیه‌سازی سنتز آمونیاک با سینتیک واکنش
-        بازگشت: دبی آمونیاک تولیدی، مصرف انرژی، تبدیل
+        Ammonia synthesis simulation with reaction kinetics
+        Returns: ammonia production flow, energy consumption, conversion
         """
-        # نسبت H2/N2 بهینه ۳ است
+        # The optimal H2/N2 ratio is 3
         H2_N2_ratio = H2_fraction / N2_fraction if N2_fraction > 0 else 3.0
         
-        # ضریب تبدیل بر اساس دما و فشار (مدل ساده)
+        # Conversion factor based on temperature and pressure (simple model)
         conversion = 0.85 * (1 + 0.005 * (P_reactor - 180)/10) * \
                     (1 - 0.008 * (T_reactor - 450)/10)
         conversion = max(0.4, min(0.98, conversion))
         
-        # تولید آمونیاک
+        # Ammonia production
         ammonia_flow = syngas_flow * 0.15 * conversion * (H2_N2_ratio / 3.0) * 0.8
         
-        # مصرف انرژی کمپرسورها
+        # Compressor energy consumption
         compressor_power = 20 * (P_reactor / 180) * (syngas_flow / 100000) * 0.9
         
         return {
@@ -301,38 +301,38 @@ class KhorasanPetrochemicalDataGenerator:
     
     def _simulate_urea_production(self, ammonia_flow, CO2_availability):
         """
-        شبیه‌سازی تولید اوره از آمونیاک و CO2
+        Urea production simulation from ammonia and CO2
         """
-        # نسبت استوکیومتری ۲NH3 + CO2 → (NH2)2CO + H2O
+        # Stoichiometric ratio 2NH3 + CO2 → (NH2)2CO + H2O
         urea_flow = ammonia_flow * 0.75 * CO2_availability * 0.92
         return max(35, min(70, urea_flow))
     
     def _simulate_melamine_production(self, ammonia_flow, urea_flow):
         """
-        شبیه‌سازی تولید ملامین از اوره
+        Melamine production simulation from urea
         """
-        # مصرف اوره به عنوان خوراک ملامین
+        # Urea consumed as melamine feed
         urea_for_melamine = min(urea_flow * 0.15, 3.5)
-        melamine_flow = urea_for_melamine * 0.28  # yield تقریبی
+        melamine_flow = urea_for_melamine * 0.28  # approximate yield
         return max(0.5, min(3.5, melamine_flow))
     
     def _calculate_emissions(self, feed_flow, energy_consumption, efficiency):
         """
-        محاسبه انتشار CO2 بر اساس مصرف سوخت و بازده
+        Calculate CO2 emission based on fuel consumption and efficiency
         """
-        # انتشار از احتراق سوخت
+        # Emission from fuel combustion
         combustion_CO2 = feed_flow * 0.002 * (1 - efficiency * 0.1)  # ton/h
         
-        # انتشار فرآیندی
+        # Process emission
         process_CO2 = feed_flow * 0.0005  # ton/h
         
         return combustion_CO2 + process_CO2
     
     def generate_sample(self, t):
         """
-        تولید یک نمونه داده کامل
+        Generate one complete data sample
         """
-        # متغیرهای غیرقابل کنترل (اختلالات)
+        # Uncontrollable variables (disturbances)
         feed_composition = {
             'CH4': np.random.uniform(*self.disturbances['feed_composition_CH4']),
             'C2H6': np.random.uniform(*self.disturbances['feed_composition_C2H6']),
@@ -341,7 +341,7 @@ class KhorasanPetrochemicalDataGenerator:
             'CO2': np.random.uniform(*self.disturbances['feed_composition_CO2'])
         }
         
-        # نرمال‌سازی ترکیب خوراک
+        # Feed composition normalization
         total = sum(feed_composition.values())
         for k in feed_composition:
             feed_composition[k] /= total
@@ -349,7 +349,7 @@ class KhorasanPetrochemicalDataGenerator:
         coking_factor = np.random.uniform(*self.disturbances['coking_factor'])
         ambient_temp = np.random.uniform(*self.limits['ambient_temp'])
         
-        # متغیرهای تصمیم (قابل کنترل توسط عامل)
+        # Decision variables (controllable by the agent)
         S_C_ratio = np.random.uniform(*self.limits['S_C_ratio'])
         T_primary = np.random.uniform(*self.limits['T_primary_reformer'])
         T_secondary = np.random.uniform(*self.limits['T_secondary_reformer'])
@@ -363,13 +363,13 @@ class KhorasanPetrochemicalDataGenerator:
         cooling_water_temp = np.random.uniform(*self.limits['cooling_water_temp'])
         cooling_water_flow = np.random.uniform(*self.limits['cooling_water_flow'])
         
-        # شبیه‌سازی ریفرمر
+        # Reformer simulation
         reformer_result = self._simulate_reformer(
             feed_flow, S_C_ratio, T_primary, T_secondary,
             feed_composition, coking_factor
         )
         
-        # شبیه‌سازی سنتز آمونیاک
+        # Ammonia synthesis simulation
         ammonia_result = self._simulate_ammonia_synthesis(
             reformer_result['syngas_flow'],
             reformer_result['H2_fraction'],
@@ -379,25 +379,25 @@ class KhorasanPetrochemicalDataGenerator:
         
         ammonia_flow = ammonia_result['ammonia_flow']
         
-        # شبیه‌سازی تولید اوره
+        # Urea production simulation
         CO2_availability = 0.85 + 0.1 * (feed_composition['CO2'] / 0.02)
         urea_flow = self._simulate_urea_production(ammonia_flow, CO2_availability)
         
-        # شبیه‌سازی تولید ملامین
+        # Melamine production simulation
         melamine_flow = self._simulate_melamine_production(ammonia_flow, urea_flow)
         
-        # محاسبه انتشار
+        # Emission calculation
         total_emissions = self._calculate_emissions(
             feed_flow, 
             reformer_result['energy_consumption'],
             reformer_result['efficiency']
         )
         
-        # محاسبه مصرف ویژه انرژی (SEC)
+        # Specific energy consumption (SEC) calculation
         SEC_ammonia = reformer_result['energy_consumption'] / ammonia_flow
         SEC_urea = (reformer_result['energy_consumption'] * 0.4) / urea_flow
         
-        # قیمت‌ها (با تغییرات تصادفی روزانه)
+        # Prices (with random daily variations)
         prices = {
             'gas': np.random.uniform(*self.prices['gas_price']),
             'electricity': np.random.uniform(*self.prices['electricity_price']),
@@ -407,7 +407,7 @@ class KhorasanPetrochemicalDataGenerator:
             'carbon': np.random.uniform(*self.prices['carbon_credit_price'])
         }
         
-        # محاسبه سودآوری
+        # Profitability calculation
         revenue = (ammonia_flow * prices['ammonia'] + 
                    urea_flow * prices['urea'] + 
                    melamine_flow * prices['melamine'])
@@ -419,9 +419,9 @@ class KhorasanPetrochemicalDataGenerator:
         
         profit = revenue - energy_cost - carbon_cost
         
-        # ساخت نمونه
+        # Build the sample
         sample = {
-            # ورودی‌ها (State)
+            # Inputs (State)
             'timestamp': t,
             'feed_flow': feed_flow,
             'feed_CH4': feed_composition['CH4'],
@@ -440,7 +440,7 @@ class KhorasanPetrochemicalDataGenerator:
             'cooling_water_temp': cooling_water_temp,
             'cooling_water_flow': cooling_water_flow,
             
-            # خروجی‌ها (State/Observation)
+            # Outputs (State/Observation)
             'syngas_flow': reformer_result['syngas_flow'],
             'H2_fraction': reformer_result['H2_fraction'],
             'N2_fraction': reformer_result['N2_fraction'],
@@ -459,13 +459,13 @@ class KhorasanPetrochemicalDataGenerator:
             'SEC_ammonia': SEC_ammonia,
             'SEC_urea': SEC_urea,
             
-            # پاداش (Reward)
+            # Reward
             'profit': profit,
             'revenue': revenue,
             'energy_cost': energy_cost,
             'carbon_cost': carbon_cost,
             
-            # قیمت‌ها
+            # Prices
             'gas_price': prices['gas'],
             'electricity_price': prices['electricity'],
             'ammonia_price': prices['ammonia'],
@@ -474,19 +474,19 @@ class KhorasanPetrochemicalDataGenerator:
             'carbon_price': prices['carbon']
         }
         
-        # افزودن نویز به تمام مقادیر عددی
+        # Add noise to all numeric values
         for key in sample:
             if key != 'timestamp' and isinstance(sample[key], (int, float)):
-                noise_level = 0.01  # 1% نویز
+                noise_level = 0.01  # 1% noise
                 sample[key] = self._add_noise(sample[key], noise_level)
         
         return sample
     
     def generate_dataset(self, n_samples=100000, save_path=None):
         """
-        تولید مجموعه داده کامل
+        Generate the complete dataset
         """
-        print(f"تولید {n_samples} نمونه داده...")
+        print(f"Generating {n_samples} data samples...")
         
         start_time = datetime.now() - timedelta(days=30)
         timestamps = self._generate_time_series(n_samples, start_time)
@@ -494,39 +494,39 @@ class KhorasanPetrochemicalDataGenerator:
         data = []
         for i, t in enumerate(timestamps):
             if i % 10000 == 0:
-                print(f"پیشرفت: {i}/{n_samples} نمونه")
+                print(f"Progress: {i}/{n_samples} samples")
             sample = self.generate_sample(t)
             data.append(sample)
         
         df = pd.DataFrame(data)
         
-        # محاسبه آمار توصیفی
-        print("\nآمار توصیفی مجموعه داده:")
+        # Calculate descriptive statistics
+        print("\nDescriptive statistics of the dataset:")
         print(df.describe())
         
-        # ذخیره
+        # Save
         if save_path:
             df.to_csv(save_path, index=False)
-            print(f"\nداده‌ها در {save_path} ذخیره شدند.")
+            print(f"\nData saved in {save_path}.")
         
         return df
     
     def validate_dataset(self, df):
         """
-        اعتبارسنجی مجموعه داده بر اساس محدودیت‌های فیزیکی
+        Validate the dataset against physical constraints
         """
-        print("\n=== اعتبارسنجی مجموعه داده ===")
+        print("\n=== Dataset validation ===")
         
-        # بررسی محدودیت‌ها
+        # Check constraints
         violations = 0
         for var, (min_val, max_val) in self.limits.items():
             if var in df.columns:
                 outside = ((df[var] < min_val) | (df[var] > max_val)).sum()
                 if outside > 0:
                     violations += outside
-                    print(f"⚠ {var}: {outside} نمونه خارج از محدوده [{min_val}, {max_val}]")
+                    print(f"⚠ {var}: {outside} samples outside the range [{min_val}, {max_val}]")
         
-        # بررسی همبستگی‌های فیزیکی
+        # Check physical correlations
         correlations = {
             ('feed_flow', 'syngas_flow'): 0.6,
             ('T_primary_reformer', 'reformer_efficiency'): 0.4,
@@ -540,126 +540,126 @@ class KhorasanPetrochemicalDataGenerator:
                 actual_corr = df[var1].corr(df[var2])
                 if abs(actual_corr - expected_corr) > 0.3:
                     corr_violations += 1
-                    print(f"⚠ همبستگی {var1}-{var2}: انتظار {expected_corr:.2f}, "
-                          f"دریافت {actual_corr:.2f}")
+                    print(f"⚠ Correlation {var1}-{var2}: expected {expected_corr:.2f}, "
+                          f"received {actual_corr:.2f}")
         
         if violations == 0 and corr_violations == 0:
-            print("✅ مجموعه داده معتبر است.")
+            print("✅ The dataset is valid.")
         else:
-            print(f"⚠ {violations + corr_violations} مورد نقض محدودیت شناسایی شد.")
+            print(f"⚠ {violations + corr_violations} constraint violations identified.")
         
         return violations == 0 and corr_violations == 0
 
 
-# اجرای تولید داده
+# Run data generation
 if __name__ == "__main__":
     generator = KhorasanPetrochemicalDataGenerator(seed=42)
     
-    # تولید 100,000 نمونه داده
+    # Generate 100,000 data samples
     df = generator.generate_dataset(n_samples=100000, save_path="khorasan_petrochem_data.csv")
     
-    # اعتبارسنجی
+    # Validation
     generator.validate_dataset(df)
     
-    # نمایش نمونه‌ای از داده‌ها
-    print("\nنمونه داده تولید شده:")
+    # Show a sample of the data
+    print("\nGenerated data sample:")
     print(df.iloc[0].to_dict())
     
-    # ذخیره در فرمت‌های مختلف برای استفاده در RL
-    # داده‌های آموزشی (80%)
+    # Save in various formats for use in RL
+    # Training data (80%)
     train_df = df.sample(frac=0.8, random_state=42)
     test_df = df.drop(train_df.index)
     
     train_df.to_csv("khorasan_petrochem_train.csv", index=False)
     test_df.to_csv("khorasan_petrochem_test.csv", index=False)
     
-    print(f"\n✅ داده‌های آموزشی: {len(train_df)} نمونه")
-    print(f"✅ داده‌های آزمون: {len(test_df)} نمونه")
-    print(f"✅ ضریب اطمینان تخمینی: 95.2%")
-    print(f"✅ خطای پیش‌بینی تخمینی: 4.8%")
-۳-۱. مشخصات داده‌های تولیدشده
-پارامتر	مقدار
-تعداد کل نمونه‌ها	۱۰۰,۰۰۰
-داده‌های آموزشی	۸۰,۰۰۰ نمونه
-داده‌های آزمون	۲۰,۰۰۰ نمونه
-تعداد ویژگی‌ها	۴۲ ویژگی
-بازه زمانی	۳۰ روز (نمونه‌برداری ۱ ثانیه‌ای)
-ضریب اطمینان	≥ ۹۵.۲٪
-خطای پیش‌بینی	≤ ۴.۸٪
+    print(f"\n✅ Training data: {len(train_df)} samples")
+    print(f"✅ Test data: {len(test_df)} samples")
+    print(f"✅ Estimated confidence factor: 95.2%")
+    print(f"✅ Estimated prediction error: 4.8%")
+3-1. Generated Data Specifications
+Parameter	Value
+Total number of samples	100,000
+Training data	80,000 samples
+Test data	20,000 samples
+Number of features	42 features
+Time range	30 days (1-second sampling)
+Confidence factor	≥ 95.2%
+Prediction error	≤ 4.8%
 
-> **توجه:** اعداد «ضریب اطمینان ۹۵.۲٪» و «خطای پیش‌بینی ۴.۸٪» در بالا بخشی از سند طراحی اولیه هستند و از پیش محاسبه نشده‌اند (در کد اصلی صرفاً چاپ می‌شدند، نه نتیجه اندازه‌گیری). در پیاده‌سازی واقعی این ریپو (بخش ۴ به بعد)، تمام متریک‌های عملکردی از بک‌تست واقعی محاسبه و گزارش می‌شوند؛ برای اعتبارسنجی صنعتی واقعی، کالیبراسیون با داده تاریخی SCADA لازم است.
+> **Note:** The figures "confidence factor 95.2%" and "prediction error 4.8%" above are part of the initial design document and were not precomputed (in the original code they were merely printed, not the result of measurement). In the actual implementation of this repo (section 4 onward), all performance metrics are computed and reported from a real backtest; for real industrial validation, calibration with historical SCADA data is required.
 
 ---
 
-## ۴. پیاده‌سازی نرم‌افزار (این ریپو)
+## 4. Software Implementation (this repo)
 
-این بخش، تبدیل سند الزامات بالا را به یک محصول نرم‌افزاری قابل اجرا مستند می‌کند: شبیه‌ساز فیزیک-آگاه، محیط یادگیری تقویتی، پایپ‌لاین آموزش/ارزیابی، و API سرویس‌دهی.
+This section documents the conversion of the above requirements document into a runnable software product: a physics-informed simulator, a reinforcement learning environment, a training/evaluation pipeline, and a serving API.
 
-### ۴-۱. معماری
+### 4-1. Architecture
 
 ```
 src/sems/
-├── config.py         محدودیت‌ها/بازه‌ها/قیمت‌ها/فضای اقدام (از بخش‌های ۱ و ۲-۴-۱)
-├── simulator.py       هسته فیزیکی مشترک (ریفرمر → سنتز آمونیاک → اوره → ملامین → انتشار → اقتصاد)
-├── data_generator.py  تولید دیتاست سنتتیک (بخش ۳) با استفاده از simulator.py
-├── env.py             KhorasanEnergyEnv - محیط Gymnasium (Box action ۱۱بعدی، Box observation)
-├── train.py           آموزش عامل PPO (stable-baselines3)
-├── evaluate.py         بک‌تست عامل در برابر baseline ثابت + محاسبه واقعی متریک‌ها
-├── forecasting.py      پیش‌بینی افق ۲۴ساعته (Monte-Carlo rollout) + تشخیص ناکارآمدی/هشدار
+├── config.py         constraints/ranges/prices/action space (from sections 1 and 2-4-1)
+├── simulator.py       shared physical core (reformer → ammonia synthesis → urea → melamine → emissions → economics)
+├── data_generator.py  synthetic dataset generation (section 3) using simulator.py
+├── env.py             KhorasanEnergyEnv - Gymnasium environment (11-dimensional Box action, Box observation)
+├── train.py           PPO agent training (stable-baselines3)
+├── evaluate.py         agent backtest against a fixed baseline + real metric computation
+├── forecasting.py      24-hour horizon forecasting (Monte-Carlo rollout) + inefficiency detection/alerts
 └── api/                FastAPI: /health, /auth/token, /recommend, /forecast/*, /alerts, /report/{period}
-scripts/generate_data.py   CLI تولید دیتاست train/test
-tests/                      pytest برای simulator، env و API
+scripts/generate_data.py   CLI for generating the train/test dataset
+tests/                      pytest for simulator, env and API
 ```
 
-**تصمیمات کلیدی:**
-- هر گام محیط RL معادل یک بازه تصمیم **۱۵ دقیقه‌ای** است (نه نمونه‌برداری ۱ثانیه‌ای SCADA)؛ این فرکانس تصمیم کنترلی است، نه فرکانس پایش. هر اپیزود = یک روز عملیاتی (۹۶ گام).
-- از ۱۱ اقدام کنترلی بخش ۲-۴-۱، هشت مورد مستقیماً در فیزیک شبیه‌ساز مدل شده‌اند؛ سه مورد (نسبت بازیابی حرارت، دبی سوخت کمکی، شیرهای کنترلی) با ضرایب ساده‌شده و مستند (کامنت `APPROX` در `simulator.py`) به مدل متصل شده‌اند.
-- پاداش عامل = سود (درآمد − هزینه انرژی − هزینه کربن) منهای جریمه نقض محدودیت، مقیاس‌شده برای پایداری عددی آموزش.
+**Key decisions:**
+- Each RL environment step is equivalent to a **15-minute** decision interval (not the 1-second SCADA sampling); this is the control decision frequency, not the monitoring frequency. Each episode = one operating day (96 steps).
+- Of the 11 control actions in section 2-4-1, eight are modeled directly in the simulator physics; three (heat recovery ratio, auxiliary fuel flow, control valves) are connected to the model with simplified, documented coefficients (the `APPROX` comment in `simulator.py`).
+- Agent reward = profit (revenue − energy cost − carbon cost) minus a constraint violation penalty, scaled for numerical stability of training.
 
-### ۴-۲. نصب و اجرا
+### 4-2. Installation and Running
 
 ```bash
 pip install -r requirements.txt
 pip install -e .
 
-# ۱. تولید دیتاست سنتتیک
+# 1. Generate the synthetic dataset
 python scripts/generate_data.py --n-samples 20000
 
-# ۲. آموزش عامل RL
+# 2. Train the RL agent
 python -m sems.train --timesteps 50000 --model-path models/ppo_khorasan.zip
 
-# ۳. ارزیابی در برابر baseline
+# 3. Evaluate against the baseline
 python -m sems.evaluate --model-path models/ppo_khorasan.zip --episodes 20
 
-# ۴. اجرای API
+# 4. Run the API
 uvicorn sems.api.main:app --reload --port 8000
-# سپس: POST /auth/token (کاربر دمو: operator / changeme) → Bearer token
+# Then: POST /auth/token (demo user: operator / changeme) → Bearer token
 ```
 
-اجرای تست‌ها:
+Run the tests:
 
 ```bash
 pytest tests/
 ```
 
-### ۴-۳. ماتریس ردیابی الزامات SRS
+### 4-3. SRS Requirements Traceability Matrix
 
-| الزام SRS | وضعیت | توضیح |
+| SRS requirement | Status | Description |
 |---|---|---|
-| مدل فیزیک-آگاه و تولید داده سنتتیک (بخش ۳) | ✅ پیاده‌سازی شد | `simulator.py`, `data_generator.py` |
-| محیط RL با فضای حالت/اقدام (بخش ۲-۳, ۲-۴-۱) | ✅ پیاده‌سازی شد | `env.py` (Gymnasium) |
-| آموزش عامل بهینه‌ساز | ✅ پیاده‌سازی شد | `train.py` (PPO/stable-baselines3) |
-| توصیه کنترلی لحظه‌ای | ✅ پیاده‌سازی شد | `POST /recommend` |
-| پیش‌بینی ۲۴ساعته مصرف/انتشار (بخش ۲-۴-۲) | ✅ پیاده‌سازی شد (rollout شبیه‌سازی) | `GET /forecast/energy`, `/forecast/emissions` |
-| تشخیص ناکارآمدی و هشدار پیشگیرانه | ✅ پیاده‌سازی شد (قانون‌محور بر اساس SEC هدف) | `forecasting.detect_inefficiency`, `POST /alerts` |
-| گزارش‌های دوره‌ای | ✅ پیاده‌سازی شد | `GET /report/{daily,weekly,monthly}` |
-| احراز هویت چندمرحله‌ای (بخش ۲-۵-۲) | ⚠️ جایگزین نمایشی | JWT تک‌عاملی دمو، **نه** MFA سازمانی واقعی |
-| رمزنگاری TLS 1.3 | ❌ خارج از دامنه ریپو | باید در لایه استقرار (reverse proxy/ingress) تأمین شود |
-| اتصال واقعی SCADA/OPC UA/Modbus/Profinet/DCS | ❌ خارج از دامنه ریپو | نیازمند سخت‌افزار/زیرساخت صنعتی واقعی |
-| در دسترس‌بودن ۹۹.۹۹٪ صنعتی | ❌ خارج از دامنه ریپو | مسئولیت لایه استقرار/زیرساخت است، نه کد اپلیکیشن |
-| داشبورد مدیریت انرژی (وب) | ❌ خارج از دامنه این تحویل | API آماده است؛ می‌تواند در تحویل بعدی مصرف شود |
+| Physics-informed model and synthetic data generation (section 3) | ✅ Implemented | `simulator.py`, `data_generator.py` |
+| RL environment with state/action space (sections 2-3, 2-4-1) | ✅ Implemented | `env.py` (Gymnasium) |
+| Optimizer agent training | ✅ Implemented | `train.py` (PPO/stable-baselines3) |
+| Real-time control recommendation | ✅ Implemented | `POST /recommend` |
+| 24-hour consumption/emission forecast (section 2-4-2) | ✅ Implemented (simulation rollout) | `GET /forecast/energy`, `/forecast/emissions` |
+| Inefficiency detection and preventive alert | ✅ Implemented (rule-based on target SEC) | `forecasting.detect_inefficiency`, `POST /alerts` |
+| Periodic reports | ✅ Implemented | `GET /report/{daily,weekly,monthly}` |
+| Multi-step authentication (section 2-5-2) | ⚠️ Demo substitute | Single-factor demo JWT, **not** real enterprise MFA |
+| TLS 1.3 encryption | ❌ Outside the repo scope | Must be provided at the deployment layer (reverse proxy/ingress) |
+| Real connection to SCADA/OPC UA/Modbus/Profinet/DCS | ❌ Outside the repo scope | Requires real industrial hardware/infrastructure |
+| Industrial 99.99% availability | ❌ Outside the repo scope | The responsibility of the deployment/infrastructure layer, not the application code |
+| Energy management dashboard (web) | ❌ Outside the scope of this delivery | The API is ready; it can be consumed in a later delivery |
 
-### ۴-۴. محدودیت شناخته‌شده: عدم تطابق مقیاس واحد SEC
+### 4-4. Known Limitation: SEC Unit Scale Mismatch
 
-اسموک‌تست این پیاده‌سازی نشان داد که فرمول ساده‌شده `energy_consumption` در `simulator.py` (به ارث‌رسیده از اسکریپت اصلی سند SRS، بدون تغییر منطق) مقادیر SEC را حدود ۷۰ برابر بزرگ‌تر از اهداف بخش ۱-۲ (۶۲.۶۱ GJ/ton آمونیاک، ۴.۵۲ GJ/ton اوره) تولید می‌کند. نتیجه عملی: `POST /alerts` و `POST /recommend` تقریباً همیشه هشدار «شدت بالا» برمی‌گردانند، صرف‌نظر از شرایط ورودی — این رفتار درست است نسبت به کد فعلی، اما بی‌فایده برای تصمیم‌گیری واقعی است. این ناهماهنگی در سند/اسکریپت اصلی از قبل وجود داشت (رجوع کنید به یادداشت بخش ۳-۱)؛ پیش از استفاده عملیاتی از `forecasting.detect_inefficiency`، باید فرمول انرژی ریفرمر با داده واقعی کارخانه کالیبره شود یا اهداف SEC بازتعریف شوند.
+A smoke test of this implementation showed that the simplified `energy_consumption` formula in `simulator.py` (inherited from the original SRS script, without logic changes) produces SEC values about 70 times larger than the targets in section 1-2 (62.61 GJ/ton for ammonia, 4.52 GJ/ton for urea). The practical result: `POST /alerts` and `POST /recommend` almost always return a "high severity" alert regardless of the input conditions — this behavior is correct relative to the current code, but useless for real decision-making. This discrepancy already existed in the original document/script (see the note in section 3-1); before operational use of `forecasting.detect_inefficiency`, the reformer energy formula must be calibrated with real plant data or the SEC targets redefined.
 

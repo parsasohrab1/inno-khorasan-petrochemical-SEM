@@ -1,9 +1,9 @@
 """
-تولید دیتاست سنتتیک برای آموزش/ارزیابی عامل یادگیری تقویتی (بخش ۳ SRS).
+Generate a synthetic dataset for training/evaluating the reinforcement learning agent (section 3 of the SRS).
 
-این ماژول بر پایه ``simulator.py`` بنا شده تا فیزیک شبیه‌سازی تکرار نشود؛
-تنها مسئولیت آن، نمونه‌برداری متغیرهای تصمیم/اختلال به‌صورت مستقل و تصادفی
-(رویکرد Physics-Informed مطابق سند اصلی) و ساخت دیتافریم خروجی است.
+This module is built on ``simulator.py`` so that the simulation physics is not duplicated;
+its only responsibility is to sample decision/disturbance variables independently and randomly
+(Physics-Informed approach per the original document) and build the output dataframe.
 """
 
 from __future__ import annotations
@@ -23,13 +23,13 @@ from sems.simulator import (
 
 
 class KhorasanPetrochemicalDataGenerator:
-    """داده‌ساز سنتتیک پتروشیمی خراسان بر پایه هسته فیزیکی مشترک simulator.py."""
+    """Khorasan Petrochemical synthetic data generator based on the shared physical core simulator.py."""
 
     def __init__(self, seed: int = RANDOM_SEED):
         self.rng = np.random.default_rng(seed)
 
     def generate_sample(self, t: datetime) -> dict:
-        """تولید یک نمونه داده کامل (یک ردیف دیتاست)."""
+        """Generate one complete data sample (one dataset row)."""
         disturbances = sample_disturbances(self.rng)
         action = sample_action(self.rng)
         prices = sample_prices(self.rng)
@@ -44,31 +44,31 @@ class KhorasanPetrochemicalDataGenerator:
         return sample
 
     def generate_dataset(self, n_samples: int = 100_000, save_path: str | None = None) -> pd.DataFrame:
-        """تولید مجموعه داده کامل با فاصله زمانی ۱ ثانیه (مطابق نرخ نمونه‌برداری SCADA)."""
-        print(f"تولید {n_samples} نمونه داده...")
+        """Generate the complete dataset with a 1-second interval (per the SCADA sampling rate)."""
+        print(f"Generating {n_samples} data samples...")
         start_time = datetime.now() - timedelta(days=30)
 
         rows = []
         for i in range(n_samples):
             if i % 10_000 == 0:
-                print(f"پیشرفت: {i}/{n_samples} نمونه")
+                print(f"Progress: {i}/{n_samples} samples")
             t = start_time + timedelta(seconds=i)
             rows.append(self.generate_sample(t))
 
         df = pd.DataFrame(rows)
 
-        print("\nآمار توصیفی مجموعه داده:")
+        print("\nDescriptive statistics of the dataset:")
         print(df.describe())
 
         if save_path:
             df.to_csv(save_path, index=False)
-            print(f"\nداده‌ها در {save_path} ذخیره شدند.")
+            print(f"\nData saved in {save_path}.")
 
         return df
 
     def validate_dataset(self, df: pd.DataFrame) -> bool:
-        """اعتبارسنجی مجموعه داده بر اساس محدودیت‌های فیزیکی و همبستگی‌های مورد انتظار."""
-        print("\n=== اعتبارسنجی مجموعه داده ===")
+        """Validate the dataset against physical constraints and expected correlations."""
+        print("\n=== Dataset validation ===")
 
         violations = 0
         checked_limits = {**OPERATING_LIMITS, **{f"action_{k}": v for k, v in ACTION_SPACE.items()}}
@@ -77,7 +77,7 @@ class KhorasanPetrochemicalDataGenerator:
                 outside = ((df[var] < min_val * 0.9) | (df[var] > max_val * 1.1)).sum()
                 if outside > 0:
                     violations += int(outside)
-                    print(f"⚠ {var}: {outside} نمونه خارج از محدوده [{min_val}, {max_val}] (با ۱۰٪ رواداری نویز)")
+                    print(f"⚠ {var}: {outside} samples outside the range [{min_val}, {max_val}] (with 10% noise tolerance)")
 
         correlations = {
             ("feed_flow", "syngas_flow"): 0.5,
@@ -91,13 +91,13 @@ class KhorasanPetrochemicalDataGenerator:
                 if abs(actual_corr - expected_corr) > 0.4:
                     corr_violations += 1
                     print(
-                        f"⚠ همبستگی {var1}-{var2}: انتظار {expected_corr:.2f}, دریافت {actual_corr:.2f}"
+                        f"⚠ Correlation {var1}-{var2}: expected {expected_corr:.2f}, received {actual_corr:.2f}"
                     )
 
         if violations == 0 and corr_violations == 0:
-            print("✅ مجموعه داده معتبر است.")
+            print("✅ The dataset is valid.")
         else:
-            print(f"⚠ {violations + corr_violations} مورد نقض شناسایی شد.")
+            print(f"⚠ {violations + corr_violations} violations identified.")
 
         return violations == 0 and corr_violations == 0
 
@@ -108,7 +108,7 @@ if __name__ == "__main__":
     df = generator.generate_dataset(n_samples=100_000, save_path="data/khorasan_petrochem_data.csv")
     generator.validate_dataset(df)
 
-    print("\nنمونه داده تولید شده:")
+    print("\nGenerated data sample:")
     print(df.iloc[0].to_dict())
 
     train_df = df.sample(frac=0.8, random_state=RANDOM_SEED)
@@ -117,5 +117,5 @@ if __name__ == "__main__":
     train_df.to_csv("data/khorasan_petrochem_train.csv", index=False)
     test_df.to_csv("data/khorasan_petrochem_test.csv", index=False)
 
-    print(f"\n✅ داده‌های آموزشی: {len(train_df)} نمونه")
-    print(f"✅ داده‌های آزمون: {len(test_df)} نمونه")
+    print(f"\n✅ Training data: {len(train_df)} samples")
+    print(f"✅ Test data: {len(test_df)} samples")

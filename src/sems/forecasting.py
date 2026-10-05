@@ -1,11 +1,11 @@
 """
-پیش‌بینی افق ۲۴ساعته مصرف انرژی/انتشار CO₂، تشخیص ناکارآمدی و هشدار پیشگیرانه
-(بخش ۲-۴-۲ SRS، ردیف‌های ۱۲ تا ۱۵).
+24-hour horizon forecasting of energy consumption/CO₂ emissions, inefficiency detection and preventive alerting
+(section 2-4-2 of the SRS, rows 12 to 15).
 
-روش پیش‌بینی: rollout مونت‌کارلوی شبیه‌ساز فیزیک-آگاه با سیاست عامل (یا سیاست
-baseline در نبود مدل آموزش‌دیده) برای افق موردنظر. این یک پیش‌بینی مبتنی بر
-مدل شبیه‌سازی است، نه رگرسیون آماری روی داده تاریخی واقعی؛ دقت آن به میزان
-مطابقت شبیه‌ساز با فرآیند واقعی کارخانه وابسته است.
+Forecasting method: Monte-Carlo rollout of the physics-informed simulator with the agent policy (or
+the baseline policy in the absence of a trained model) over the desired horizon. This is a forecast based on the
+simulation model, not a statistical regression on real historical data; its accuracy depends on how well
+the simulator matches the real plant process.
 """
 
 from __future__ import annotations
@@ -44,7 +44,7 @@ def forecast_horizon(
     steps: int = STEPS_PER_EPISODE,
     seed: int | None = None,
 ) -> dict[str, Any]:
-    """پیش‌بینی مصرف انرژی و انتشار CO₂ برای ``steps`` گام تصمیم آینده."""
+    """Forecast energy consumption and CO₂ emissions for ``steps`` future decision steps."""
     env = KhorasanEnergyEnv(seed=seed if seed is not None else RANDOM_SEED, steps_per_episode=steps)
     policy = _policy_from_model(model)
 
@@ -75,20 +75,20 @@ def forecast_horizon(
 
 
 def detect_inefficiency(sec_ammonia: float, sec_urea: float) -> list[dict[str, Any]]:
-    """تشخیص ناکارآمدی انرژی با مقایسه SEC لحظه‌ای با شاخص هدف (بخش ۱-۲ SRS)."""
+    """Detect energy inefficiency by comparing instantaneous SEC with the target indicator (section 1-2 of the SRS)."""
     alerts = []
 
     dev_ammonia_pct = (sec_ammonia - SEC_TARGET_AMMONIA_GJ_PER_TON) / SEC_TARGET_AMMONIA_GJ_PER_TON * 100.0
     if dev_ammonia_pct > SEC_ALERT_DEVIATION_PCT:
         alerts.append(
             {
-                "unit": "آمونیاک",
+                "unit": "Ammonia",
                 "metric": "SEC_ammonia",
                 "current": sec_ammonia,
                 "target": SEC_TARGET_AMMONIA_GJ_PER_TON,
                 "deviation_pct": dev_ammonia_pct,
-                "severity": "بالا" if dev_ammonia_pct > 2 * SEC_ALERT_DEVIATION_PCT else "متوسط",
-                "message": f"مصرف ویژه انرژی واحد آمونیاک {dev_ammonia_pct:.1f}٪ بالاتر از هدف است.",
+                "severity": "High" if dev_ammonia_pct > 2 * SEC_ALERT_DEVIATION_PCT else "Medium",
+                "message": f"The ammonia unit's specific energy consumption is {dev_ammonia_pct:.1f}% above the target.",
             }
         )
 
@@ -96,13 +96,13 @@ def detect_inefficiency(sec_ammonia: float, sec_urea: float) -> list[dict[str, A
     if dev_urea_pct > SEC_ALERT_DEVIATION_PCT:
         alerts.append(
             {
-                "unit": "اوره",
+                "unit": "Urea",
                 "metric": "SEC_urea",
                 "current": sec_urea,
                 "target": SEC_TARGET_UREA_GJ_PER_TON,
                 "deviation_pct": dev_urea_pct,
-                "severity": "بالا" if dev_urea_pct > 2 * SEC_ALERT_DEVIATION_PCT else "متوسط",
-                "message": f"مصرف ویژه انرژی واحد اوره {dev_urea_pct:.1f}٪ بالاتر از هدف است.",
+                "severity": "High" if dev_urea_pct > 2 * SEC_ALERT_DEVIATION_PCT else "Medium",
+                "message": f"The urea unit's specific energy consumption is {dev_urea_pct:.1f}% above the target.",
             }
         )
 

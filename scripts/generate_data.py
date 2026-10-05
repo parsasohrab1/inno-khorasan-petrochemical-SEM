@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""CLI تولید دیتاست سنتتیک آموزش/آزمون. مثال:
+"""CLI for generating the synthetic training/test dataset. Example:
 
     python scripts/generate_data.py --n-samples 100000 --out-dir data
 """
@@ -14,7 +14,7 @@ from sems.data_generator import KhorasanPetrochemicalDataGenerator
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="تولید دیتاست سنتتیک SEMS")
+    parser = argparse.ArgumentParser(description="Generate the SEMS synthetic dataset")
     parser.add_argument("--n-samples", type=int, default=100_000)
     parser.add_argument("--out-dir", type=str, default="data")
     parser.add_argument("--seed", type=int, default=RANDOM_SEED)
@@ -36,8 +36,8 @@ def main() -> None:
     train_df.to_csv(out_dir / "khorasan_petrochem_train.csv", index=False)
     test_df.to_csv(out_dir / "khorasan_petrochem_test.csv", index=False)
 
-    print(f"\n✅ داده‌های آموزشی: {len(train_df)} نمونه")
-    print(f"✅ داده‌های آزمون: {len(test_df)} نمونه")
+    print(f"\n✅ Training data: {len(train_df)} samples")
+    print(f"✅ Test data: {len(test_df)} samples")
 
 
 if __name__ == "__main__":

@@ -1,9 +1,9 @@
 """
-بک‌تست عامل آموزش‌دیده در برابر یک baseline ثابت (اقدام میانی بازه مجاز)،
-و محاسبه واقعی متریک‌ها (سود، SEC، انتشار) — بدون هیچ عدد از پیش‌فرض یا ادعای
-دقتی که محاسبه نشده باشد.
+Backtest of the trained agent against a fixed baseline (mid-range allowed action),
+and real computation of metrics (profit, SEC, emissions) — without any precomputed number or
+accuracy claim that has not been computed.
 
-مثال اجرا:
+Example run:
     python -m sems.evaluate --model-path models/ppo_khorasan.zip --episodes 20
 """
 
@@ -49,7 +49,7 @@ def _rollout_episode(env: KhorasanEnergyEnv, policy) -> dict:
 
 
 def baseline_policy(_obs: np.ndarray) -> np.ndarray:
-    """اقدام ثابت میانی بازه مجاز (بدون کنترل هوشمند) - نقطه مرجع مقایسه."""
+    """Fixed mid-range allowed action (without intelligent control) - comparison reference point."""
     return np.array([(lo + hi) / 2 for lo, hi in ACTION_SPACE.values()], dtype=np.float32)
 
 
@@ -67,7 +67,7 @@ def evaluate_with_model(
     seed: int = RANDOM_SEED,
     steps_per_episode: int | None = None,
 ) -> dict:
-    """هسته ارزیابی؛ مدل از پیش بارگذاری‌شده می‌پذیرد تا از بارگذاری مکرر دیسک در API جلوگیری شود."""
+    """Evaluation core; accepts a preloaded model to avoid repeated disk loading in the API."""
     env_kwargs = {"seed": seed}
     if steps_per_episode is not None:
         env_kwargs["steps_per_episode"] = steps_per_episode
@@ -109,22 +109,22 @@ def evaluate_with_model(
         "profit_uplift_pct_vs_baseline": profit_uplift_pct,
         "emissions_reduction_pct_vs_baseline": emissions_reduction_pct,
         "note": (
-            "این اعداد از بک‌تست شبیه‌ساز فیزیک-آگاه محاسبه شده‌اند، نه از داده‌های "
-            "عملیاتی واقعی کارخانه؛ برای اعتبارسنجی صنعتی به کالیبراسیون با داده‌های "
-            "واقعی SCADA نیاز است."
+            "These figures were computed from a backtest of the physics-informed simulator, not from "
+            "real plant operational data; for industrial validation, calibration with "
+            "real SCADA data is required."
         ),
     }
     return report
 
 
 def evaluate(model_path: str, episodes: int, seed: int = RANDOM_SEED) -> dict:
-    """بارگذاری مدل از دیسک و اجرای ارزیابی (برای استفاده CLI)."""
+    """Load the model from disk and run the evaluation (for CLI use)."""
     model = PPO.load(model_path)
     return evaluate_with_model(model, episodes, seed)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="ارزیابی عامل RL در برابر baseline")
+    parser = argparse.ArgumentParser(description="Evaluate the RL agent against the baseline")
     parser.add_argument("--model-path", type=str, default="models/ppo_khorasan.zip")
     parser.add_argument("--episodes", type=int, default=20)
     parser.add_argument("--seed", type=int, default=RANDOM_SEED)
@@ -138,7 +138,7 @@ def main() -> None:
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    print(f"\n✅ گزارش در {report_path} ذخیره شد.")
+    print(f"\n✅ Report saved in {report_path}.")
 
 
 if __name__ == "__main__":

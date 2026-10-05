@@ -1,11 +1,11 @@
 """
-احراز هویت JWT ساده برای API.
+Simple JWT authentication for the API.
 
-⚠️ توجه امنیتی: این یک جایگزین نمایشی برای الزام «احراز هویت چندمرحله‌ای»
-بخش ۲-۵-۲ SRS است، نه پیاده‌سازی کامل MFA سازمانی. رمزنگاری انتقال (TLS 1.3)
-نیز باید در لایه استقرار (reverse proxy / ingress) تأمین شود، نه در این کد.
-برای استفاده واقعی: SEMS_JWT_SECRET را به یک مقدار تصادفی قوی تنظیم کنید و
-کاربران را از یک منبع هویت واقعی (نه env var) احراز کنید.
+⚠️ Security note: this is a demo substitute for the "multi-step authentication" requirement
+of section 2-5-2 of the SRS, not a complete enterprise MFA implementation. Transport encryption (TLS 1.3)
+must also be provided at the deployment layer (reverse proxy / ingress), not in this code.
+For real use: set SEMS_JWT_SECRET to a strong random value and
+authenticate users from a real identity source (not an env var).
 """
 
 from __future__ import annotations
@@ -45,7 +45,7 @@ def create_access_token(subject: str) -> str:
 def get_current_user(token: str = Depends(oauth2_scheme)) -> str:
     credentials_error = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="اعتبارسنجی توکن ناموفق بود",
+        detail="Token validation failed",
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
